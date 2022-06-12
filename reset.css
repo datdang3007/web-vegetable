@@ -1,0 +1,31 @@
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box; */
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* không tạo viền và border cho thẻ input */
+input,button {
+    outline: none;
+    border: none;
+    background: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Type number: delete ô increment, decrement */
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+    margin: 0;
+  }

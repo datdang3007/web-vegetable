@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700">
+    <link rel="stylesheet" href="/style.css">
+    <title>Veggy - React Shopping Cart Demo</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="container f-center-between">
+            <img class="logo" src="/images/logo.png" alt="">
+            <form action="">
+                <div class="input-group f-center-center">
+                    <input class="search-input" placeholder="Search for Vegetables and Fruits" type="text">
+                    <button class="search"></button>
+                </div>
+            </form>
+            <div class="cart f-center-center">
+                <div class="cart-info">
+                    <div class="no-of-items f-center-flexend">
+                        <p>No. of items</p>
+                        <p>:</p>
+                        <p>
+                            <span class="items">0</span>
+                        </p>
+                    </div>
+
+                    <div class="sub-total f-center-flexend">
+                        <p>Sub Total</p>
+                        <p>:</p>
+                        <p>
+                            <span class="total">0</span>
+                        </p>
+                    </div>
+                </div>
+
+                <a class="cart-icon">
+                    <img src="/images/cart-icon.png" alt="">
+                </a>
+
+                <div class="cart-preview">
+                    <div class="cart-preview-content">
+                        <div class="cart-preview-items">
+                            <div class="empty-cart">
+                                <img src="https://res.cloudinary.com/sivadass/image/upload/v1495427934/icons/empty-cart.png" alt="empty-cart">
+                                <h2>You cart is empty!</h2>
+                            </div>
+                        </div>
+                        <div style="position: absolute; height: 6px; right: 2px; bottom: 2px; left: 2px; border-radius: 3px;">
+                            <div style="position: relative;display: block;height: 100%;cursor: pointer;border-radius: inherit;background-color: rgb(0, 0, 0);width: 0px;"></div>
+                        </div>
+                        <div style="position: absolute; width: 6px; right: 2px; bottom: 2px; top: 2px; border-radius: 3px;">
+                            <div style="position: relative; display: block; width: 100%; cursor: pointer; border-radius: inherit; background-color: rgba(0, 0, 0, 0.2); height: 0px; transform: translateY(52px);"></div>
+                        </div>
+                    </div>
+                    <div class="action-block">
+                        <button class="checkout disabled">PROCEED TO CHECKOUT</button>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </header>
+
+    <div class="products-wrapper">
+        <div class="container">
+            <div class="products flex"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p class="footer-links">
+            <a href="" target="">View Source on Github</a>
+            <span> / </span>
+            <a href="" target="">Need any help?</a>
+            <span> / </span>
+            <a href="" target="">Say Hi on Twitter</a>
+            <span> / </span>
+            <a href="" target="">Read My Blog</a>
+        </p>
+        <p>© 2017
+            <strong>Veggy</strong>
+            - Organic Green Store
+        </p>
+    </footer>
+
+    <div class="modal-wrapper">
+        <div class="modal">
+            <button class="close">×</button>
+            <div class="quick-view"></div>
+        </div>
+    </div>
+
+</body>
+<script type="module" src="/main.js"></script>
+</html>
