@@ -63,6 +63,33 @@ function renderCart(list) {
     cartPreviewItems.innerHTML = listString + "</ul>"
 }
 
+searchInput.addEventListener("input", function(e) {
+    e.preventDefault()
+    if (e.target.value) {
+        let searchProducts = []
+        for (const prd of productsDB) {
+            const itemBasicName = prd.name.split("- 1 Kg")[0].split("- 1/4 Kg")[0].toLowerCase().split("")
+            const itemName = prd.name.split("- 1 Kg")[0].split("- 1/4 Kg")[0].split("")
+            let correctly = 0
+            for (const srch of searchInput.value.split("")) {
+                if (itemName.includes(srch) || itemBasicName.includes(srch)) {
+                    correctly++
+                    if (!searchProducts.includes(prd) && correctly === searchInput.value.split("").length) {
+                        searchProducts.push(prd)
+                    }
+                }
+            }
+        }
+        renderProducts(searchProducts)
+        product = document.querySelectorAll(".product")
+        productEvent()
+    } else if (e.target.value === "") {
+        renderProducts(productsDB)
+        product = document.querySelectorAll(".product")
+        productEvent()
+    }
+})
+
 btnSearch.addEventListener("click", function(e) {
     e.preventDefault()
     let searchProducts = []
