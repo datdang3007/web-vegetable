@@ -4,9 +4,9 @@ const products = document.querySelector(".products")
 const items = document.querySelector(".items")
 const total = document.querySelector(".total")
 const modalWrapper = document.querySelector(".modal-wrapper")
-const body = document.querySelector("body")
 const cartIcon = document.querySelector(".cart-icon")
 const cartPreviewItems = document.querySelector(".cart-preview-items")
+const cartPreview = document.querySelector(".cart-preview")
 const searchInput = document.querySelector(".search-input")
 const btnSearch = document.querySelector(".search")
 const checkOut = document.querySelector(".checkout")
@@ -240,19 +240,29 @@ function productEvent () {
 }
 
 // khi bấm vào icon giỏ hàng sẽ xổ ra các mặt hàng trong giỏ (nếu không có thì sẽ làm empty)
-
+let hide = false
 let clicked = false
 cartIcon.addEventListener("click", function(e) {
     e.preventDefault()
-    const cartPreview = document.querySelector(".cart-preview")
-    if (!clicked) {
-        clicked = true
-        console.log("active");
-        cartPreview.classList.add("active")
-    } 
-    else if (clicked) {
+    if (clicked) {
         clicked = false
-        cartPreview.classList.remove("active")
-        console.log("remove active");
+        return
+    }
+    if (!hide) {
+        hide = true
+        cartPreview.classList.add("active")
     }
 })
+
+document.addEventListener("mousedown", (event) => {
+    if (hide) {
+        if (cartIcon.contains(event.target)) {
+            hide = false
+            clicked = true
+            cartPreview.classList.remove("active")
+        } else if (!cartPreview.contains(event.target)) {
+            hide = false
+            cartPreview.classList.remove("active")
+        }
+    }
+});
