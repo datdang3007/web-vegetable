@@ -4,6 +4,7 @@ const products = document.querySelector(".products")
 const items = document.querySelector(".items")
 const total = document.querySelector(".total")
 const modalWrapper = document.querySelector(".modal-wrapper")
+const body = document.querySelector("body")
 const cartIcon = document.querySelector(".cart-icon")
 const cartPreviewItems = document.querySelector(".cart-preview-items")
 const searchInput = document.querySelector(".search-input")
@@ -122,38 +123,49 @@ function productEvent () {
         const decrement = element.querySelector(".decrement")
         const increment = element.querySelector(".increment")
         const buttonAddToCart = element.querySelector(".btn-addToCart")
+        const quantity =element.querySelector(".quantity")
         const image = element.querySelector("img")
+
+        // Khi input vào ô quantity mà value bé hơn 1 thì sẽ set về 1
+        quantity.addEventListener("input", function(e) {
+            if(e.target.value) {
+                if(e.target.value <= 0) {
+                    alert("isvalid value!")
+                    e.target.value = 1
+                }
+            }
+        })
     
         // tăng giảm số lượng hàng (khi giảm thì ko thể giảm số lượng xuống thấp hơn 1)
         decrement.addEventListener("click", function(e) {
             e.preventDefault()
-            if (element.querySelector(".quantity").value > 1) {
-                element.querySelector(".quantity").value--
+            if (quantity.value > 1) {
+                quantity.value--
             }
         })
         increment.addEventListener("click", function(e) {
             e.preventDefault()
-            element.querySelector(".quantity").value++
+            quantity.value++
         })
     
         // nút mua hàng khi click sẽ tăng items lên 1 nếu mặt hàng đó đc mua lần đầu, tổng số tiền phải trả sẽ bằng số lượng hàng mua nhân giá tiền của sản phẩm
         buttonAddToCart.addEventListener("click", function(e) {
             e.preventDefault()
-            total.textContent = +total.textContent + element.querySelector(".quantity").value * +element.querySelector(".price").textContent
+            total.textContent = +total.textContent + quantity.value * +element.querySelector(".price").textContent
             buttonAddToCart.textContent = "✔ ADDED"
             buttonAddToCart.classList.add("added");
             const item = {
                 name: element.children[1].textContent,
                 price: element.children[2].children[0].textContent,
                 image: element.children[0].children[0].src,
-                quantity: element.querySelector(".quantity").value,
+                quantity: quantity.value,
             };
             if (productInCart[0]){
                 let flag = 0
                 productInCart.filter(val => {
                     if (val.name === element.children[1].textContent){
                         flag = 1
-                        val.quantity = +val.quantity + +element.querySelector(".quantity").value
+                        val.quantity = +val.quantity + +quantity.value
                     }
                 })
                 if (!flag) {
@@ -188,6 +200,10 @@ function productEvent () {
             } else {
                 checkOut.classList.add("disabled")
             }
+            cartIcon.querySelector("img").classList.add("shake")
+            setTimeout(function(){
+                cartIcon.querySelector("img").classList.remove("shake")
+            }, 200);
             setTimeout(function(){
                 buttonAddToCart.textContent = "ADD TO CART"
                 buttonAddToCart.classList.remove("added");
@@ -208,6 +224,12 @@ function productEvent () {
                     <span class="product-price">${productsDB[idx].price}</span>
                 </div>
             `
+            const modal = document.querySelector(".modal-wrapper")
+            modal.addEventListener("click", function(e) {
+                if(e.target === modal) {
+                    modalWrapper.classList.remove("active");
+                }
+            })
             const btnClose = document.querySelector(".close")
             btnClose.addEventListener("click", function(event) {
                 event.preventDefault()
@@ -218,16 +240,19 @@ function productEvent () {
 }
 
 // khi bấm vào icon giỏ hàng sẽ xổ ra các mặt hàng trong giỏ (nếu không có thì sẽ làm empty)
+
 let clicked = false
 cartIcon.addEventListener("click", function(e) {
     e.preventDefault()
-    console.log(product);
     const cartPreview = document.querySelector(".cart-preview")
     if (!clicked) {
         clicked = true
+        console.log("active");
         cartPreview.classList.add("active")
-    } else if (clicked) {
+    } 
+    else if (clicked) {
         clicked = false
         cartPreview.classList.remove("active")
+        console.log("remove active");
     }
 })

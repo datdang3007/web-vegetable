@@ -75,6 +75,9 @@ header {
                 z-index: 2;
                 position: relative;
                 cursor: pointer;
+                img.shake {
+                    animation: shake 0.1s forwards infinite alternate linear;
+                }
             }
             
             .cart-preview {
@@ -447,4 +450,30 @@ footer {
     display: -webkit-flex;
     -webkit-align-items: center;
     -webkit-justify-content: center;
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(-10deg);
+    }
+
+    40% {
+        transform: rotate(10deg);
+    }
+
+    60% {
+        transform: rotate(-10deg);
+    }
+
+    80% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
 }
