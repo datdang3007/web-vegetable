@@ -250,6 +250,23 @@ header {
         .products {
             flex-wrap: wrap;
             padding: 16px;
+            .no-results {
+                text-align: center;
+                max-width: 520px;
+                margin: 0 auto;
+                img {
+                    width: 320px;
+                    margin: 16px 32px 32px;
+                    opacity: .33;
+                }
+                h2 {
+                    margin-bottom: 16px;
+                    color: #666;
+                }
+                p {
+                    color: #999;
+                }
+            }
             .product {
                 background: #fff;
                 margin: 16px;
