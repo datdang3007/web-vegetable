@@ -8,7 +8,6 @@ const cartIcon = document.querySelector(".cart-icon")
 const cartPreviewItems = document.querySelector(".cart-preview-items")
 const cartPreview = document.querySelector(".cart-preview")
 const searchInput = document.querySelector(".search-input")
-const btnSearch = document.querySelector(".search")
 const checkOut = document.querySelector(".checkout")
 const productInCart = []
 let productRemove = []
@@ -28,6 +27,32 @@ function renderProducts(list) {
                 <div class="stepper-input">
                     <a class="decrement" href="#">–</a>
                     <input type="number" class="quantity" value="1">
+                    <a class="increment" href="#">+</a>
+                </div>
+                <div class="product-action">
+                    <button class="btn-addToCart">ADD TO CART</button>
+                </div>
+            </div>
+        `
+    }
+    products.innerHTML = listString
+}
+
+function updateRenderProducts(list) {
+    let listString = ""
+    for (const todo of list) {
+        listString += `
+            <div class="product">
+                <div class="image">
+                    <img src=${todo.image} alt=${todo.name}>
+                </div>
+                <h4>${todo.name}</h4>
+                <div class="price-items f-center-center">
+                    <p class="price">${todo.price}</p>
+                </div>
+                <div class="stepper-input">
+                    <a class="decrement" href="#">–</a>
+                    <input type="number" class="quantity" value="${todo.quantity}">
                     <a class="increment" href="#">+</a>
                 </div>
                 <div class="product-action">
@@ -74,11 +99,16 @@ searchInput.addEventListener("input", function(e) {
             const itemLowerName = prd.name.split("- 1 Kg")[0].split("- 1/4 Kg")[0].toLowerCase()
             if (itemLowerName.indexOf(searchValue) !== -1) {
                 flag = true
+                product.forEach(element => {
+                    if (element.children[1].textContent.split("- 1 Kg")[0].split("- 1/4 Kg")[0] === prd.name.split("- 1 Kg")[0].split("- 1/4 Kg")[0]) {
+                        prd["quantity"] = element.children[3].children[1].value
+                    }
+                })
                 searchProducts.push(prd)
             }
         }
         if (flag) {
-            renderProducts(searchProducts)
+            updateRenderProducts(searchProducts)
             product = document.querySelectorAll(".product")
             productEvent()
         } else {
@@ -92,7 +122,7 @@ searchInput.addEventListener("input", function(e) {
         }
     } else if (e.target.value === "") {
         flag = false
-        renderProducts(productsDB)
+        updateRenderProducts(productsDB)
         product = document.querySelectorAll(".product")
         productEvent()
     }
